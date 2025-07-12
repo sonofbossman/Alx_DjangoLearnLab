@@ -9,4 +9,4 @@ class Book(models.Model):
   updated = models.DateTimeField(auto_now=True)
 
   def __str__(self):
-    return self.title
+    return str(self.id)
