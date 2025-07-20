@@ -34,7 +34,7 @@ def register(request):
       return redirect('list-books')
   else:
     form = UserCreationForm()
-  return render(request, 'registration/register.html', {'form':form})  
+  return render(request, 'relationship_app/register.html', {'form':form})  
 
 # class RegisterView(FormView):
 #   template_name = 'registration/register.html'
