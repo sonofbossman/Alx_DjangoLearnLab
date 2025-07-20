@@ -3,7 +3,7 @@ from django.views.generic.detail import DetailView
 from .models import Library, Author, Book, Librarian
 
 # Create your views here.
-def fbv_listview(request):
+def list_books(request):
   try:
     books = Book.objects.all()
     context = {'books': books}
