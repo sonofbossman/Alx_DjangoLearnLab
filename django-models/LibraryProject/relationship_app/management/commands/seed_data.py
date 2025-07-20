@@ -55,7 +55,7 @@ class Command(BaseCommand):
     # Create books
     self.stdout.write(self.style.NOTICE(f"Creating {num_books} books..."))
     authors = list(Author.objects.all())
-    list_of_books = [Book(title=faker.sentence(nb_words=4), author=random.choice(authors)) for _ in range(num_books)]
+    list_of_books = [Book(title=faker.sentence(nb_words=4), author=random.choice(authors), publication_year=int(faker.year())) for _ in range(num_books)]
     Book.objects.bulk_create(list_of_books)
     
     # Create libraries
