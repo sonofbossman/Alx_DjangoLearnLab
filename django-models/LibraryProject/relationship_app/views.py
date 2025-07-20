@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic.detail import DetailView
-from .models import Author, Book, Library, Librarian
+from .models import Library, Author, Book, Librarian
 
 # Create your views here.
 def fbv_listview(request):
