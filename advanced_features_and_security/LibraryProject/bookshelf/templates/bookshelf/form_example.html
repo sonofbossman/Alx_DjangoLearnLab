@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Book Form Example</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 1em;
+      }
+      label,
+      input,
+      select {
+        display: block;
+        margin: 0.5em 0;
+      }
+      .errorlist {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Add or Edit Book</h1>
+
+    <form method="post">
+      {% csrf_token %} {{ form.as_p }}
+
+      <input type="submit" value="Submit" />
+    </form>
+
+    <p><a href="{% url 'book-list' %}">← Back to book list</a></p>
+  </body>
+</html>
