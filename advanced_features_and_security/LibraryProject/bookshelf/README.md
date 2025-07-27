@@ -21,4 +21,4 @@
 
 **Decorators Used**:
 
-- `@permission_required('relationship_app.can_edit')`
+- `@permission_required('bookshelf.can_edit')`
