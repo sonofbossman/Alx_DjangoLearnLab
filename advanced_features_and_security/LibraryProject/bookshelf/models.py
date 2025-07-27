@@ -39,5 +39,13 @@ class Book(models.Model):
   created = models.DateTimeField(auto_now_add=True)
   updated = models.DateTimeField(auto_now=True)
 
+  class Meta:
+    permissions = [
+      ("can_view", "Can view book"),
+      ("can_create", "Can create book"),
+      ("can_edit", "Can edit book"),
+      ("can_delete", "Can delete book"),
+    ]
+
   def __str__(self):
     return str(self.id)
