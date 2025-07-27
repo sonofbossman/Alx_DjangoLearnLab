@@ -37,6 +37,11 @@ SESSION_COOKIE_SECURE = True
 # Optional: Force HTTPS redirect
 SECURE_SSL_REDIRECT = True
 
+# HTTP Strict Transport Security (HSTS) settings
+SECURE_HSTS_SECONDS = 31536000  # One year in seconds
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True  # Apply to subdomains
+SECURE_HSTS_PRELOAD = True  # Allow site to be preloaded in browsers
+
 ALLOWED_HOSTS = []
 
 
