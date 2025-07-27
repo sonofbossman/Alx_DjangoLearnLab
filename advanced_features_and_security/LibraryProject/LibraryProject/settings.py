@@ -41,6 +41,8 @@ SECURE_SSL_REDIRECT = True
 SECURE_HSTS_SECONDS = 31536000  # One year in seconds
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True  # Apply to subdomains
 SECURE_HSTS_PRELOAD = True  # Allow site to be preloaded in browsers
+# Trust X-Forwarded-Proto header set by proxy (e.g., NGINX, Heroku)
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 ALLOWED_HOSTS = []
 
