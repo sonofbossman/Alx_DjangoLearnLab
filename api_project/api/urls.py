@@ -1,10 +1,11 @@
-from django.urls import path
-from api.views import BookList
-from rest_framework.urlpatterns import format_suffix_patterns
+from django.urls import path, include
+from api.views import BookList, BookViewSet
+from rest_framework.routers import DefaultRouter
+
+router = DefaultRouter()
+router.register(r'books_all', BookViewSet, basename='book_all')
 
 urlpatterns = [
   path('books/', BookList.as_view(), name='book-list'), # Maps to the BookList view
-#   path('<int:pk>', BookDetails.as_view(), name='book-detail')
+  path('', include(router.urls))
 ]
-
-urlpatterns = format_suffix_patterns(urlpatterns)
