@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{ object.title }}</title>
+  </head>
+  <body>
+    <h1>{{ object.title }}</h1>
+    <p>Author: {{ object.author }}</p>
+    <p>Year: {{ object.publication_year }}</p>
+    <p>Description: {{ object.description }}</p>
+
+    <a href="{% url 'book-update' object.pk %}">Edit</a> |
+    <a href="{% url 'book-delete' object.pk %}">Delete</a> |
+    <a href="{% url 'book-list' %}">Back to list</a>
+  </body>
+</html>
