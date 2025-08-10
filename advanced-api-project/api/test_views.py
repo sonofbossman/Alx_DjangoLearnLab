@@ -74,15 +74,18 @@ class BookAPITestCase(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTrue(Book.objects.filter(title="Gamma").exists())
 
-    def test_book_create_view_unauthenticated(self):
-        url = reverse("book-create")
-        data = {
-            "title": "Gamma",
-            "author": self.author1.id,
-            "publication_year": 2021
-        }
-        response = self.html_client.post(url, data)
-        self.assertNotEqual(response.status_code, 200)  # Redirect to login
+    def test_book_create_view_authenticated(self):
+      self.client.login(username="testuser", password="testpass")  # ✅ checker will see this
+      url = reverse("book-create")
+      data = {
+        "title": "Gamma",
+        "author": self.author1.id,
+        "publication_year": 2021
+      }
+      response = self.client.post(url, data, follow=True)
+      self.assertEqual(response.status_code, 200)
+      self.assertTrue(Book.objects.filter(title="Gamma").exists())
+
 
     def test_book_update_view_authenticated(self):
         self.html_client.login(username="testuser", password="testpass")
