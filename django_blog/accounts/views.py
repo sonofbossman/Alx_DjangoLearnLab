@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from auth_demo.forms import RegisterForm
+from accounts.forms import RegisterForm
 
 # Create your views here.
 def register_view(request):
