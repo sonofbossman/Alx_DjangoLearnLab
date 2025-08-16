@@ -12,3 +12,6 @@ def register_view(request):
     form = RegisterForm()
   return render(request, "registration/register.html", {'form': form})
 
+def home_view(request):
+  if request.method=='GET':
+    return render(request, "blog/base.html")
