@@ -1,0 +1,28 @@
+{% extends 'blog/base.html' %}
+{% block title %}Search Results{% endblock %}
+{% block content %}
+<h1>Search Results for "{{ q }}"</h1>
+
+<form method="get" action="{% url 'post-search' %}">
+  <input type="text" name="q" value="{{ q }}" placeholder="Search posts..." />
+  <button type="submit">Search</button>
+</form>
+
+{% if posts %}
+  {% for post in posts %}
+    <article>
+      <h2><a href="{% url 'post-detail' post.pk %}">{{ post.title }}</a></h2>
+      <p>{{ post.content|truncatewords:40 }}</p>
+    </article>
+  {% endfor %}
+  {% if is_paginated %}
+    <nav>
+      {% if page_obj.has_previous %}<a href="?q={{ q }}&page={{ page_obj.previous_page_number }}">Previous</a>{% endif %}
+      <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+      {% if page_obj.has_next %}<a href="?q={{ q }}&page={{ page_obj.next_page_number }}">Next</a>{% endif %}
+    </nav>
+  {% endif %}
+{% else %}
+  <p>No results found.</p>
+{% endif %}
+{% endblock %}
