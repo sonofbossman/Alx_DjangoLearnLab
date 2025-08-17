@@ -6,6 +6,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse_lazy, reverse
 from .models import Post, Comment
 from django.db.models import Q
+from taggit.models import Tag
 
 # Create your views here.
 def register_view(request):
@@ -131,3 +132,19 @@ class PostSearchView(ListView):
         ctx = super().get_context_data(**kwargs)
         ctx["q"] = self.request.GET.get("q", "")
         return ctx
+
+class PostByTagListView(ListView):
+    model = Post
+    template_name = "blog/posts_by_tag.html"  # you’ll need to create this template
+    context_object_name = "posts"
+    paginate_by = 5  # optional, if you want pagination
+
+    def get_queryset(self):
+        # get tag from URL
+        self.tag = get_object_or_404(Tag, slug=self.kwargs.get("tag_slug"))
+        return Post.objects.filter(tags__in=[self.tag])
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["tag"] = self.tag
+        return context
