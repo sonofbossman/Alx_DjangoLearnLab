@@ -13,9 +13,11 @@
       <nav>
         <ul>
           <li><a href="{% url 'home' %}">Home</a></li>
-          {% comment %}
           <li><a href="{% url 'posts' %}">Blog Posts</a></li>
-          {% endcomment %}
+          <li>{% if user.is_authenticated %}
+              <a href="{% url 'post-create' %}">Create new post</a>
+              {% endif %}
+          </li>
           <li><a href="{% url 'login' %}">Login</a></li>
           <li><a href="{% url 'register' %}">Register</a></li>
           <li>
