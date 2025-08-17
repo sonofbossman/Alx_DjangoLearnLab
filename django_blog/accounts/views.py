@@ -8,10 +8,10 @@ def register_view(request):
     form = RegisterForm(request.POST)
     if form.is_valid():
       form.save()
-      return redirect('login')
+      return redirect('profile')
   else:
     form = RegisterForm()
-  return render(request, "registration/register.html", {'form': form})
+  return render(request, "blog/register.html", {'form': form})
 
 def home_view(request):
   if request.method=='GET':
@@ -28,4 +28,4 @@ def profile_view(request):
   else:
         form = ProfileForm(instance=profile)
     
-  return render(request, 'accounts/profile.html', {'form': form})
+  return render(request, 'blog/profile.html', {'form': form})
