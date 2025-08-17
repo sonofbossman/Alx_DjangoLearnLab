@@ -117,17 +117,15 @@ class PostSearchView(ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        qs = super().get_queryset()
         q = self.request.GET.get("q", "").strip()
         if not q:
-            return qs.none()
+            return Post.objects.none()
         filters = Q(title__icontains=q) | Q(content__icontains=q)
         try:
-            # If using taggit
-            filters |= Q(tags__name__icontains=q)
+            filters |= Q(tags__name__icontains=q)  # for taggit
         except Exception:
             pass
-        return qs.filter(filters).distinct()
+        return Post.objects.filter(filters).distinct()
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
