@@ -16,16 +16,15 @@ class RegisterView(generics.CreateAPIView):
   queryset = CustomUser.objects.all()
   serializer_class = RegisterSerializer
 
-  def post(self, request, *args, **kwargs):
+  def create(self, request, *args, **kwargs):
     serializer = self.get_serializer(data=request.data)
-    if serializer.is_valid():
-      account = serializer.save()
-      token, _ = Token.objects.get_or_create(user=account) # get or create token for user
-      response_data = dict(serializer.data)
-      response_data['token'] = token.key
-      response_data['message'] = "Registration successful" # customized response on successful creation
-      return Response(data=response_data, status=status.HTTP_201_CREATED)
-    return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    serializer.is_valid(raise_exception=True)
+    self.perform_create(serializer)
+    response_data = {
+      'message': "Registration successful",
+      'user': serializer.data
+    }
+    return Response(data=response_data, status=status.HTTP_201_CREATED)
   
 class LogoutView(APIView):
   """
