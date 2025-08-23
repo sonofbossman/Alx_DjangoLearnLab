@@ -5,6 +5,7 @@ from rest_framework.authtoken.models import Token
 from django.contrib.auth import get_user_model
 
 class RegisterSerializer(serializers.ModelSerializer):
+  # serializers.CharField()
   confirm_password = serializers.CharField(write_only=True, style={'input-type': 'password'})
   token = serializers.SerializerMethodField()
   class Meta:
