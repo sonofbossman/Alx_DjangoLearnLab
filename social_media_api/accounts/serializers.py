@@ -17,8 +17,8 @@ class RegisterSerializer(serializers.ModelSerializer):
     }
   
   def get_token(self, obj):
-    token, _ = Token.objects.get_or_create(user=obj)
-    return token.key
+    token = Token.objects.create(user=obj).key
+    return token
   
   def create(self, validated_data):
     password = validated_data.get('password', None)
